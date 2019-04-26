@@ -1,0 +1,62 @@
+{
+  "backslashboys": [
+    {
+      "name": "Suzie",
+      "specification": "UX Design",
+      "comment": "I'm looking forward to a nice IT project to have a huge project at the end!",
+      "profilepic": "girl-1.jpg"
+    },
+    {
+      "name": "Kay",
+      "specification": "Frontend and JavaScript Programming",
+      "comment": "This could be the best chance to improve my knowledge in backend programming.",
+      "profilepic": "boy-1.jpg"
+    },
+    {
+      "name": "Sandra",
+      "specification": "Project Management",
+      "comment": "Lorem Ipsum!",
+      "profilepic": "girl-2.jpg"
+    },
+    {
+      "name": "Ramond",
+      "specification": "System administration",
+      "comment": "I'm happy to join this team and work together in a group where I can say my opinions and discuss in\n                a nice way.'",
+      "profilepic": "boy-2.jpg"
+    }
+  ],
+  "itcloud": [
+    {
+      "name": "Kira",
+      "specification": "UX Design",
+      "comment": "I\\'m looking forward to a nice IT project to have a huge project at the end",
+      "profilepic": "girl-3.jpg"
+    },
+    {
+      "name": "Jazmine",
+      "specification": "Frontend and JavaScript Programming",
+      "comment": "This could be the best chance to improve my knowledge in frontend programming",
+      "profilepic": "girl-4.jpg"
+    }
+  ],
+  "databasement": [
+    {
+      "name": "Paul",
+      "specification": "Full Stack Development",
+      "comment": "I'm so happy to join this team!",
+      "profilepic": "boy-3.jpg"
+    },
+    {
+      "name": "Lukas",
+      "specification": "Electrical Engineering",
+      "comment": "This feels like a once in a lifetime opportunity!",
+      "profilepic": "boy-4.jpg"
+    },
+    {
+      "name": "Mary",
+      "specification": "Architecture",
+      "comment": "I could have never imagined to be a part of such a huge project!",
+      "profilepic": "girl-5.jpg"
+    }
+  ]
+}
