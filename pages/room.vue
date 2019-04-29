@@ -1,7 +1,12 @@
+<!--This is the room site template-->
 <template>
     <div class="content">
         <h2>You can find {{selectedGroup.name}} here:</h2>
-        <div :class="selectedGroup.room">
+
+        <div :class="{'room-1' : (selectedGroup.name === 'Backslash Boys'),'room-2' : (selectedGroup.name === 'IT Cloud'),
+        'room-3' : (selectedGroup.name === 'Databasement')}">
+
+
             <img class="floorplan" src="../static/floor-plan.png">
             <div class="pointer">&nbsp;</div>
         </div>
@@ -15,16 +20,18 @@
         computed: {
             ...mapState(['page']),
             ...mapGetters(['selectedGroup'])
-        },
-        props: {
-            selectedUser: {
-                type: Object
-            }
         }
     }
 </script>
 
 <style scoped lang="scss">
+
+    .page-enter-active, .page-leave-active {
+        transition: opacity .25s ease-out;
+    }
+    .page-enter, .page-leave-to {
+        opacity: 0;
+    }
 
     .floorplan {
         height: auto;
@@ -43,7 +50,7 @@
     }
 
     .pointer {
-        border: 10px solid yellow;
+        border: 10px solid #e0c22a;
         border-radius: 50px;
         width: 50px;
         height: 50px;

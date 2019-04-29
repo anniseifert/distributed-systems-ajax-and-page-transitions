@@ -1,18 +1,47 @@
+<!--This is the members site template-->
 <template>
     <div class="content">
-        <div class="info-area">
-            <img style="width: 300px; height: 300px;" id="profile-pic" :src="'/user/' + selectedGroup.members[0].profilepic">
+        <div class="wrapper">
+
             <div>
-                <dl id="member-list" data-counter="0" data-active-member="0">
-                    <dt>Name:</dt>
-                    <dd id="name">{{selectedGroup.members[0].name}}</dd>
-                    <dt>Specification:</dt>
-                    <dd id="specification">{{selectedGroup.members[0].specification}}</dd>
-                    <dt>Comment:</dt>
-                    <dd id="comment">{{selectedGroup.members[0].comment}}</dd>
-                </dl>
-                <button v-on:click="getMembers" id="next-member">See next member</button>
+                <p>Click to see next member rendered trough AJAX Request!</p>
+                <div class="info-area">
+                    <img style="width: 300px; height: 300px;" id="profile-pic-ajax" src="/user/default.png">
+                    <div>
+                        <dl id="member-list-ajax" data-active-member="start">
+                            <dt>Name:</dt>
+                            <dd id="name-ajax">Click to send data request</dd>
+                            <dt>Specification:</dt>
+                            <dd id="specification-ajax">Click to send data request</dd>
+                            <dt>Comment:</dt>
+                            <dd id="comment-ajax">Click to send data request</dd>
+                        </dl>
+                        <button v-on:click="getMembersAjax" id="next-member-ajax">See next member</button>
+                    </div>
+                </div>
             </div>
+
+            <div>
+                <p>Click to see next member rendered from Vuex Store!</p>
+                <div class="info-area">
+                    <img style="width: 300px; height: 300px;" id="profile-pic"
+                         :src="'/user/' + selectedGroup.members[0].profilepic">
+                    <div>
+                        <dl id="member-list" data-active-member="0">
+                            <dt>Name:</dt>
+                            <dd id="name">{{selectedGroup.members[0].name}}</dd>
+                            <dt>Specification:</dt>
+                            <dd id="specification">{{selectedGroup.members[0].specification}}</dd>
+                            <dt>Comment:</dt>
+                            <dd id="comment">{{selectedGroup.members[0].comment}}</dd>
+                        </dl>
+                        <button v-on:click="getMembers(selectedGroup)" id="next-member">See next member</button>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 </template>
@@ -26,76 +55,77 @@
             ...mapState(['page']),
             ...mapGetters(['selectedGroup'])
         },
-        props: {
-            selectedUser: {
-                type: Object
-            }
-        },
         methods: {
             replaceNextMember(data) {
-
-
                 //got user information from ajax request
 
                 //filter information fpr selected group
                 var selectedGroup = this.selectedGroup.jsonname;
                 var group = (data[selectedGroup]);
 
-                var memberlist = document.getElementById("member-list");
+                var memberlist = document.getElementById("member-list-ajax");
                 var memberLength = parseInt(group.length);
                 memberLength--;
                 console.log(memberLength);
 
-                var dataActiveMember = parseInt(memberlist.getAttribute("data-active-member"));
+                var dataActiveMember = memberlist.getAttribute("data-active-member");
 
-
-                // var dataNextMember = (dataActiveMember + 1);
-
-                // var activeMember = group[dataActiveMember];
                 console.log(dataActiveMember);
 
                 if (dataActiveMember == memberLength) {
                     memberlist.setAttribute("data-active-member", "0");
                     dataActiveMember = 0;
+                } else if (dataActiveMember == "start") {
+                    dataActiveMember = 0;
                 } else {
                     dataActiveMember++;
                 }
 
-
                 var nextMember = group[dataActiveMember];
 
-                var nameElement = document.getElementById("name");
-                var SpecElement = document.getElementById("specification");
-                var CommentElement = document.getElementById("comment");
-                var profilePicElement = document.getElementById("profile-pic");
+                var nameElement = document.getElementById("name-ajax");
+                var specElement = document.getElementById("specification-ajax");
+                var commentElement = document.getElementById("comment-ajax");
+                var profilePicElement = document.getElementById("profile-pic-ajax");
 
                 nameElement.innerHTML = nextMember.name;
-                SpecElement.innerHTML = nextMember.specification;
-                CommentElement.innerHTML = nextMember.comment;
+                specElement.innerHTML = nextMember.specification;
+                commentElement.innerHTML = nextMember.comment;
                 profilePicElement.src = ("/user/" + nextMember.profilepic);
 
 
                 memberlist.setAttribute("data-active-member", dataActiveMember.toString());
             },
 
-            setMember(data) {
+            getMembers(selectedGroup){
+                var memberlist = document.getElementById("member-list");
+                var memberLength = parseInt(selectedGroup.members.length);
+                memberLength--;
 
-                var selectedGroup = this.selectedGroup.jsonname;
-                var group = (data[selectedGroup]);
+                var dataActiveMember = parseInt(memberlist.getAttribute("data-active-member"));
 
-                var nextMember = group[0];
+                if (dataActiveMember == memberLength) {
+
+                    dataActiveMember = 0;
+                    memberlist.setAttribute("data-active-member", "0");
+                } else {
+                    dataActiveMember++;
+                    var dataActiveMemberStr = dataActiveMember.toString();
+                    memberlist.setAttribute("data-active-member", dataActiveMemberStr);
+                }
 
                 var nameElement = document.getElementById("name");
                 var SpecElement = document.getElementById("specification");
                 var CommentElement = document.getElementById("comment");
                 var profilePicElement = document.getElementById("profile-pic");
 
-                nameElement.innerHTML = nextMember.name;
-                SpecElement.innerHTML = nextMember.specification;
-                CommentElement.innerHTML = nextMember.comment;
-                profilePicElement.src = ("/user/" + nextMember.profilepic);
+                nameElement.innerHTML = selectedGroup.members[dataActiveMember].name;
+                SpecElement.innerHTML = selectedGroup.members[dataActiveMember].specification;
+                CommentElement.innerHTML = selectedGroup.members[dataActiveMember].comment;
+                profilePicElement.src = ("/user/" + selectedGroup.members[dataActiveMember].profilepic);
             },
-            getMembers() {
+
+            getMembersAjax() {
                 let _this = this;
 
                 var httpRequest = new XMLHttpRequest();
@@ -109,29 +139,41 @@
                 };
                 httpRequest.open('GET', "members.json");
                 httpRequest.send();
-
-            },
-
-
-            activateFirstMember() {
-
-
             }
-
-        },
-
-        mounted() {
-            this.activateFirstMember();
         }
     }
-
 </script>
 
 <style scoped lang="scss">
 
+    .page-enter-active, .page-leave-active {
+        transition: opacity .25s ease-out;
+    }
+    .page-enter, .page-leave-to {
+        opacity: 0;
+    }
+
     .content {
         padding: 20px;
         margin-bottom: 20px;
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: space-between;
+
+       > div {
+            width: 49%;
+        }
+
+        p {
+            background-color: #121425;
+            color: white;
+            padding: 5px 20px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
 
     }
 
@@ -155,12 +197,11 @@
 
     .info-area {
         background-color: #121542;
-        width: 75%;
-        margin: 0 auto;
         display: flex;
         padding: 20px;
 
-        #profile-pic {
+
+        #profile-pic, #profile-pic-ajax {
             width: 300px;
             height: 300px;
             border: 5px solid white;

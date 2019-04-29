@@ -1,3 +1,4 @@
+<!--This is the main start page-->
 <template>
     <section class="content">
         <div>

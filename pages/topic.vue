@@ -1,6 +1,7 @@
+<!--This is the topic site template-->
 <template>
     <div class="content">
-        <h2>Project Type: {{ selectedGroup.projectType }} </h2>
+        <h2>Project Type of {{selectedGroup.name}}: {{ selectedGroup.projectType }} </h2>
         <div class="container">
             <p class=""> {{ selectedGroup.descriptionOne }}</p>
             <img class="topic-image right" v-bind:src="'/' + selectedGroup.imgOne">
@@ -20,15 +21,17 @@
             ...mapState(['page']),
             ...mapGetters(['selectedGroup'])
         },
-        props: {
-            selectedUser: {
-                type: Object
-            }
-        }
     }
 </script>
 
 <style scoped lang="scss">
+
+    .page-enter-active, .page-leave-active {
+        transition: opacity .25s ease-out;
+    }
+    .page-enter, .page-leave-to {
+        opacity: 0;
+    }
 
     .content {
         padding: 20px;

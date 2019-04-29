@@ -13,31 +13,10 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  /*
-  ** Customize the progress bar color
-  */
+
   loading: { color: '#3B8070' },
 
    router: { middleware: 'pages' },
-
-  /*
-  ** Build configuration
-  */
-  build: {
-    // /*
-    // ** Run ESLint on save
-    // */
-    // extend (config, { isDev, isClient }) {
-    //   if (isDev && isClient) {
-    //     config.module.rules.push({
-    //       enforce: 'pre',
-    //       test: /\.(js|vue)$/,
-    //       loader: 'eslint-loader',
-    //       exclude: /(node_modules)/
-    //     })
-    //   }
-    // }
-  },
 
     module: {
         rules: [

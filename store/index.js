@@ -21,7 +21,7 @@ const createStore = () => {
                         {
                             "name": "Suzie",
                             "specification": "UX Design",
-                            "comment": "I'm looking forward to a nice IT project to have a huge project at the end!",
+                            "comment": "I'm looking forward to a nice IT project to build new software!",
                             "profilepic": "girl-1.jpg"
                         },
                         {

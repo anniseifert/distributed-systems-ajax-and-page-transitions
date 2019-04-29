@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+
+    html {
+        font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        word-spacing: 1px;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+    }
+
+    .change-web {
+        text-align: center;
+        display: block;
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 30px 0;
+        text-decoration: none;
+    }
+
+    .change-web:hover {
+        color: #e0c22a
+    }
+
+    .nav-highlighter {
+        transition: left ease 1s;
+        opacity: 0;
+    }
+
+
+    .nav-highlighter.topic {
+        left: 10px;
+        opacity: 1;
+
+    }
+
+    .nav-highlighter.room {
+        left: calc(33.333% + 10px);
+        opacity: 1;
+    }
+
+    .nav-highlighter.members {
+        left: calc(66.666% + 10px);
+        opacity: 1;
+    }
+
+
+    .content {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .topic-image {
+        height: 300px;
+        border: 5px solid white;
+    }
+
+    .topic-image.left {
+        margin-right: 20px;
+    }
+
+    .topic-image.right {
+        margin-left: 20px;
+    }
+
+
+    .container {
+        display: flex;
+        padding: 20px;
+        justify-content: space-between;
+        background-color: #121542;
+        margin-bottom: 40px;
+    }
+
+    .container p {
+        color: white;
+    }
+
+    h2 {
+        padding-left: 20px;
+    }
+
+    nav.second-nav {
+        background-color: #fff;
+        border-bottom: 10px solid #121542;
+        position: relative;
+    }
+
+    .nav-highlighter {
+        position: absolute;
+        width: calc(33.33333% - 20px);
+        height: calc(100% - 20px);
+        top: 10px;
+        /*left: 10px;*/
+        background-color: #e0c22a;
+        transition: 1s all ease;
+
+    }
+
+    ul {
+        list-style: none;
+        width: 100%;
+
+        display: flex;
+        justify-content: space-around;
+        padding-left: 10px;
+    }
+
+
+    ul a {
+        display: inline-block;
+
+        text-transform: uppercase;
+        font-size: 25px;
+        color: #121542;
+        position: relative;
+        padding: 10px 20px;
+        z-index: 2;
+        font-weight: bold;
+    }
+
+
+    ul a,
+    ul a:active,
+    ul a:visited {
+        color: black;
+        text-decoration: none;
+    }
+
+
+    header {
+        background-color: #121542;
+    }
+
+    footer {
+        background-color: #121542;
+        color: white;
+        padding: 10px 20px;
+        bottom: 0;
+        width: 100%;
+    }
+
+    footer p a {
+        color: white;
+        text-decoration: none;
+    }
+
+    footer p a:hover {
+        text-decoration: underline;
+    }
+
+
+    h1 {
+        font-weight: bold;
+        font-size: 14px;
+        width: 100%;
+        color: #fff;
+        background-color: #121542;
+        text-transform: uppercase;
+        padding: 10px 10px 10px 20px;
+        text-align: center;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+
+    .content {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .wrapper > div {
+        width: 49%;
+    }
+
+    .wrapper p {
+        background-color: #121425;
+        color: white;
+        padding: 5px 20px;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+
+    .info-area {
+        background-color: #121542;
+        display: flex;
+        padding: 20px;
+    }
+
+
+    #profile-pic {
+        width: 300px;
+        height: 300px;
+        border: 5px solid white;
+
+        display: block;
+        border-radius: 300px;
+        margin-right: 20px;
+
+    }
+
+    dt {
+        font-weight: bold;
+        font-size: 20px;
+        color: white;
+    }
+
+
+    dd {
+        color: white;
+        margin-bottom: 10px;
+
+    }
+
+    body {
+        margin: 0;
+    }
+
+
+</style>
+
+<header>
+
+    <h1>Ajax and page transitions - Group Projects Demo</h1>
+
+    <div class="dyn-stat-menu">
+        <a href="/" class="change-web">Back to dynamic website</a>
+    </div>
+
+    <div class="navigation">
+        <nav class="second-nav">
+            <div class="nav-highlighter members">
+            </div>
+            <ul>
+                <li><a href="/statichtml/topic.html">Backslash Boys' Topic</a></li>
+                <li><a href="/statichtml/room.html">Backslash Boys' Room</a></li>
+                <li><a href="/statichtml/members.html">Backslash Boys' Members</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<div class="content">
+    <div class="wrapper">
+
+        <div>
+            <div class="info-area">
+                <img style="width: 300px; height: 300px;" id="profile-pic"
+                     src="../user/boy-1.jpg">
+                <div>
+                    <dl id="member-list" data-active-member="0">
+                        <dt>Name:</dt>
+                        <dd id="name">Kay</dd>
+                        <dt>Specification:</dt>
+                        <dd id="specification">UX Design</dd>
+                        <dt>Comment:</dt>
+                        <dd id="comment">I'm looking forward to a nice IT project to build new software!</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    <p>Git Repo: <a target="_blank"
+                    href="https://github.com/anniseifert/distributed-systems-ajax-and-page-transitions">https://github.com/anniseifert/distributed-systems-ajax-and-page-transitions</a>
+    </p>
+    <p>Made by Anni Seifert, Dresden</p>
+</footer>
+
+
+</body>
+</html>

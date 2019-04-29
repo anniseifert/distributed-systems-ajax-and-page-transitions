@@ -1,26 +1,25 @@
+<!--This component contains the main site navigation and includes the AppGroupNav-->
 <template>
     <div class="navigation">
-        <nav class="group-nav">
-            <app-group-nav/>
-        </nav>
-        <!--<nav class="second-nav"  v-if="(page !== 'index')">-->
-        <nav class="second-nav">
-            <div class="nav-highlighter" :class="{'topic' : (page === 'topic'),'room' : (page === 'room'),'members' : (page === 'members')}">&nbsp;
-            </div>
 
+        <app-group-nav/>
+
+        <nav class="second-nav">
+            <div class="nav-highlighter"
+                 :class="{'topic' : (page === 'topic'),'room' : (page === 'room'),'members' : (page === 'members')}">
+            </div>
             <ul>
                 <nuxt-link to="/topic">
-                    <li> {{ selectedGroup.navname}} topic</li>
+                    <li> {{ selectedGroup.navname }} topic</li>
                 </nuxt-link>
                 <nuxt-link to="/room">
-                    <li>{{ selectedGroup.navname}} room</li>
+                    <li>{{ selectedGroup.navname }} room</li>
                 </nuxt-link>
                 <nuxt-link to="/members">
-                    <li>{{ selectedGroup.navname}} members</li>
+                    <li>{{ selectedGroup.navname }} members</li>
                 </nuxt-link>
             </ul>
         </nav>
-
 
     </div>
 
@@ -30,16 +29,9 @@
 <script>
     import AppGroupNav from './AppGroupNav.vue'
     import {mapState, mapGetters} from 'vuex'
-    import {TweenMax, TimelineMax, Sine, Expo} from 'gsap'
 
 
     export default {
-        data() {
-            return {
-                saved: false,
-                menuOpened: false
-            }
-        },
         components: {
             AppGroupNav
 
@@ -48,53 +40,6 @@
             ...mapState(['page']),
             ...mapGetters(['selectedGroup'])
         },
-        props: {
-            selectedUser: {
-                type: Object
-            }
-        },
-
-        methods: {
-            beforeEnter(el) {
-                TweenMax.set(el, {
-                    scale: 0.5,
-                    transformOrigin: '100% 0%'
-                })
-                TweenMax.set(el.childNodes, {
-                    scale: 2
-                })
-            },
-            enter(el, done) {
-                TweenMax.fromTo(
-                    el,
-                    0.2,
-                    {
-                        opacity: 0.5,
-                        scale: 0
-                    },
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        ease: Sine.easeOut
-                    }
-                )
-                TweenMax.staggerFromTo(
-                    el.childNodes,
-                    0.45,
-                    {
-                        opacity: 0.5
-                    },
-                    {
-                        delay: 0.1,
-                        opacity: 1,
-                        ease: Sine.easeOut
-                    },
-                    0.04
-                )
-                done()
-            }
-        }
-
     }
 </script>
 
@@ -102,9 +47,8 @@
 
 
     .nav-highlighter {
-        transition: left ease 1s;
+        transition: left 0.25s ease-out;
         opacity: 0;
-
 
 
         &.topic {
@@ -122,6 +66,14 @@
             left: calc(66.666% + 10px);
             opacity: 1;
         }
+    }
+
+    .change-enter-active, .change-leave-active {
+        transition: background-color 0.5s ease-out;
+    }
+
+    .change-enter, .change-leave-to {
+        background-color: red !important;
     }
 
 
@@ -191,4 +143,6 @@
     #text {
         transform-origin: 50% 50%;
     }
+
+
 </style>

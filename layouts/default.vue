@@ -1,16 +1,20 @@
+<!--This is the default page layout-->
 <template>
-
     <div>
         <header>
-            <h1>Ajax and page transitions</h1>
-            <nuxt-link to="/" class="subtitle-link"><p class="subtitle">Group Projects</p></nuxt-link>
+            <nuxt-link to="/" class="subtitle-link">
+                <h1>Ajax and page transitions - Group Projects Demo</h1>
+            </nuxt-link>
+            <a href="/statichtml/topic.html" class="change-web" target="_blank">Visit static website</a>
             <app-navigation/>
         </header>
 
         <nuxt/>
 
         <footer>
-            <p>Git Repo:</p>
+            <p>Git Repo: <a target="_blank"
+                            href="https://github.com/anniseifert/distributed-systems-ajax-and-page-transitions">https://github.com/anniseifert/distributed-systems-ajax-and-page-transitions</a>
+            </p>
             <p>Made by Anni Seifert, Dresden</p>
         </footer>
     </div>
@@ -19,11 +23,12 @@
 <script>
 
     import AppNavigation from '~/components/AppNavigation.vue'
+    import {store} from '../store'
 
     export default {
         components: {
-            AppNavigation,
-        }
+            AppNavigation
+        },
     }
 </script>
 
@@ -48,12 +53,38 @@
         background-color: #121542;
     }
 
+    .change-web {
+        text-align: center;
+        display: block;
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 30px 0;
+        text-decoration: none;
+    }
+
+    .change-web:hover {
+        color: #e0c22a
+    }
+
     footer {
         background-color: #121542;
         color: white;
         padding: 10px 20px;
         bottom: 0;
         width: 100%;
+
+        p {
+            a {
+                color: white;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
 
 
     }
@@ -70,18 +101,7 @@
         margin-bottom: 0;
         padding-bottom: 0;
     }
-    .subtitle {
-        font-family: sans-serif;
-        font-weight: bold;
-        font-size: 50px;
-        width: 100%;
-        color: #fff;
-        text-transform: uppercase;
-        padding: 10px 10px 10px 20px;
-        text-align: center;
-        margin-bottom: 20px;
-        text-decoration: none;
-    }
+
 
     .subtitle-link {
         text-decoration: none;

@@ -1,3 +1,4 @@
+<!--This Component includes the Group Navigation based on the entries in the vuex store-->
 <template>
     <ul class="group-navigation">
 
@@ -12,15 +13,10 @@
 
 <script>
     import {mapState, mapGetters} from 'vuex'
-    import { store } from '../store'
+    import {store} from '../store'
 
     export default {
-        data() {
-            return {
-                saved: false,
-                menuOpened: false,
-            }
-        },
+
         computed: {
             ...mapState(['page', 'groups', 'indexedUser']),
             ...mapGetters(['selectedGroup'])
@@ -29,7 +25,10 @@
 
         methods: {
             changeGroup(i) {
+                //commit the new value to the vuex store
                 this.$store.commit('changeGroup', i);
+
+                //and change the selection optically
                 var thisli = event.target.parentElement;
                 var thislisiblings = thisli.parentElement.childNodes;
                 for (var j = 0; j < thislisiblings.length; j++) {
@@ -37,14 +36,10 @@
                 }
 
                 thisli.classList.add("active");
-                // this.activateFirstMember();
-
-
-
-            //    TODO reload page under navigation (members)
             },
 
             activateSelectedGroup() {
+                //Active selected group optically initially from vuex store variable
                 var groupitems = document.getElementsByClassName("group-item");
                 var selectedGroup = this.selectedGroup.name;
 
